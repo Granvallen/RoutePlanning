@@ -15,7 +15,7 @@ using namespace std;
 class Car
 {
 public:
-	Car() {} // ÎªÊ²Ã´Ã»ÓĞÄ¬ÈÏ¹¹Ôìº¯Êı»á±¨´í
+	Car() {} // ä¸ºä»€ä¹ˆæ²¡æœ‰é»˜è®¤æ„é€ å‡½æ•°ä¼šæŠ¥é”™
 	Car(long id, long from, long to, int speed, long planTime):
 		id(id), from_id(from), to_id(to), max_speed(speed), 
 		plan_time(planTime), next_cross(from), isSetoff(false), isStoped(false) {}
@@ -36,31 +36,31 @@ public:
 
 	friend ostream & operator<<(ostream &out, Car &car);
 
-	long id; // ³µµÄid
-	long from_id; // ÆğÊ¼Â·¿Úid
-	long to_id; // ÖÕµãÂ·¿Úid
+	long id; // è½¦çš„id
+	long from_id; // èµ·å§‹è·¯å£id
+	long to_id; // ç»ˆç‚¹è·¯å£id
 	
-	int max_speed; // ×î´ó³µËÙ
-	int curr_speed; // µ±Ç°³µËÙ  Õâ¸ö±äÁ¿µ½Ä¿Ç°ÎªÖ¹ºÃÏñÃ»ÆğÊ²Ã´×÷ÓÃ ¿ÉÄÜµ½¿¼ÂÇÊµÊ±Â·¿öÊ±²ÅÄÜÆğ²Î¿¼
+	int max_speed; // æœ€å¤§è½¦é€Ÿ
+	int curr_speed; // å½“å‰è½¦é€Ÿ  è¿™ä¸ªå˜é‡åˆ°ç›®å‰ä¸ºæ­¢å¥½åƒæ²¡èµ·ä»€ä¹ˆä½œç”¨ å¯èƒ½åˆ°è€ƒè™‘å®æ—¶è·¯å†µæ—¶æ‰èƒ½èµ·å‚è€ƒ
 
-	// ³µÔÚÒ»ÌõÂ·ÉÏµÄ×ø±ê ÈçÒ»Ìõ³¤Îª4µÄÂ·×ø±êÎª 1 2 3 4
-	// Õâ¸öÖµÔÚ³µ½øÈëµÀÂ·Ê±³õÊ¼»¯ ĞĞ½ø¹ı³ÌÖĞ¸üĞÂ
+	// è½¦åœ¨ä¸€æ¡è·¯ä¸Šçš„åæ ‡ å¦‚ä¸€æ¡é•¿ä¸º4çš„è·¯åæ ‡ä¸º 1 2 3 4
+	// è¿™ä¸ªå€¼åœ¨è½¦è¿›å…¥é“è·¯æ—¶åˆå§‹åŒ– è¡Œè¿›è¿‡ç¨‹ä¸­æ›´æ–°
 	int pos;
 
-	bool isSetoff; // ÊÇ·ñÒÑ³ö·¢
-	long plan_time; // Ô­¼Æ»®³ö·¢Ê±¼ä
-	long real_time; // Êµ¼Ê³ö·¢Ê±¼ä
-	long dally_time; // ÒÑÑÓ³ÙµÄÊ±¼ä
+	bool isSetoff; // æ˜¯å¦å·²å‡ºå‘
+	long plan_time; // åŸè®¡åˆ’å‡ºå‘æ—¶é—´
+	long real_time; // å®é™…å‡ºå‘æ—¶é—´
+	long dally_time; // å·²å»¶è¿Ÿçš„æ—¶é—´
 
-	list<long> route_plan; // ¼Æ»®Â·Ïß¾­¹ıµÄÂ·¿Úid ²»°üÀ¨ÒÑ¾­×ß¹ıµÄÂ·¿Ú ËäÈ»´ğ°¸ÀïÒªÇóÊÇĞĞÊ»µÀÂ·µÄid
-	list<long> route_real; // Êµ¼ÊĞĞÊ»¾­¹ıÂ·¿Úid
-	int next_turn; // ÏÂÒ»¸öÂ·¿Ú×ªÍä·½Ïò 0-ÉÏ 1-ÓÒ 2-ÏÂ 3-
-	long next_road; // ÏÂÒ»ÌõĞĞÊ»µÄµÀÂ·id ĞĞÊ»µ½Â·¿Ú¸üĞÂ
-	long next_cross; // ÏÂÒ»¸öÂ·¿Úid
-	int lane_num; // ËùĞĞÊ»µÄ³µµÀºÅ ³µÔÚÉÏÂ·Ê±¸üĞÂ
+	list<long> route_plan; // è®¡åˆ’è·¯çº¿ç»è¿‡çš„è·¯å£id ä¸åŒ…æ‹¬å·²ç»èµ°è¿‡çš„è·¯å£ è™½ç„¶ç­”æ¡ˆé‡Œè¦æ±‚æ˜¯è¡Œé©¶é“è·¯çš„id
+	list<long> route_real; // å®é™…è¡Œé©¶ç»è¿‡è·¯å£id
+	int next_turn; // ä¸‹ä¸€ä¸ªè·¯å£è½¬å¼¯æ–¹å‘ 0-ä¸Š 1-å³ 2-ä¸‹ 3-
+	long next_road; // ä¸‹ä¸€æ¡è¡Œé©¶çš„é“è·¯id è¡Œé©¶åˆ°è·¯å£æ›´æ–°
+	long next_cross; // ä¸‹ä¸€ä¸ªè·¯å£id
+	int lane_num; // æ‰€è¡Œé©¶çš„è½¦é“å· è½¦åœ¨ä¸Šè·¯æ—¶æ›´æ–°
 
-	bool isStoped; // ÊÇ·ñÍ£³µ
-	bool isScheduled; // ÊÇ·ñÔÚµ±Ç°Ê±¼äÆ¬¶Î¾­¹ıµ÷¶È
+	bool isStoped; // æ˜¯å¦åœè½¦
+	bool isScheduled; // æ˜¯å¦åœ¨å½“å‰æ—¶é—´ç‰‡æ®µç»è¿‡è°ƒåº¦
 
 
 private:
@@ -102,7 +102,7 @@ public:
 
 	void initCarList(string carfile);
 	Car& operator[](long i) { return carlist[i]; }
-	void add(Car& car) { carlist[car.id] = car; } // unordered_mapÕâÀï[]ÊµÏÖÉî¸´ÖÆ
+	void add(Car& car) { carlist[car.id] = car; } // unordered_mapè¿™é‡Œ[]å®ç°æ·±å¤åˆ¶
 	void remove(long id) { carlist.erase(id); }
 	const unordered_map<long, Car>& getList() { return carlist; }
 	bool empty() { return carlist.empty(); }
@@ -121,7 +121,7 @@ void CarList::initCarList(string carfile)
 {
 	const int N = 5;
 	ifstream car_in(carfile);
-	string line; // ¶ÁÈ¡µÄÒ»ĞĞĞÅÏ¢
+	string line; // è¯»å–çš„ä¸€è¡Œä¿¡æ¯
 
 	if (car_in)
 		while (getline(car_in, line))

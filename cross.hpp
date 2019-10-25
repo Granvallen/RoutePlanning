@@ -25,7 +25,7 @@ public:
 		if (crossinfo)
 		{
 			id = crossinfo[0];
-			// ×¢ÒâÕâÀïÃ»Â·µÄ -1 Ò²»á·Å½øÈ¥ °ÑĞòºÅ×÷Îª¼ü Â·idÎªÖµ
+			// æ³¨æ„è¿™é‡Œæ²¡è·¯çš„ -1 ä¹Ÿä¼šæ”¾è¿›å» æŠŠåºå·ä½œä¸ºé”® è·¯idä¸ºå€¼
 			road_id[0] = crossinfo[1]; road_id[1] = crossinfo[2];
 			road_id[2] = crossinfo[3]; road_id[3] = crossinfo[4];
 		}
@@ -33,7 +33,7 @@ public:
 
 	friend ostream & operator<<(ostream &out, Cross &cross);
 
-	// ÓÉÂ·ĞòºÅµÃµ½Â·id
+	// ç”±è·¯åºå·å¾—åˆ°è·¯id
 	long getRoadIdx(int roadid)
 	{
 		for (auto& i : road_id)
@@ -42,11 +42,11 @@ public:
 		return -1;
 	}
 
-	long id; // Â·¿Úid
-	map<long, int> road_id; // ËÄ¸öÁ¬½ÓµÀÂ·µÄid Ã»Â·µÄÎª-1 ÓÃmap¿ÉÒÔÊµÏÖÂ·idÉıĞò
+	long id; // è·¯å£id
+	map<long, int> road_id; // å››ä¸ªè¿æ¥é“è·¯çš„id æ²¡è·¯çš„ä¸º-1 ç”¨mapå¯ä»¥å®ç°è·¯idå‡åº
 
-	//int road_num; // Á¬½ÓµÀÂ·ÊıÄ¿
-	bool isBlock; // ÊÇ·ñ¶ÂÈû
+	//int road_num; // è¿æ¥é“è·¯æ•°ç›®
+	bool isBlock; // æ˜¯å¦å µå¡
 private:
 
 };
@@ -80,7 +80,7 @@ public:
 
 private:
 
-	map<long, Cross> crosslist; // ÓÉÓÚÖ®ºócrossÒª°´id´ÓĞ¡µ½´ó±éÀú ËùÒÔÓÃÓĞĞòmap
+	map<long, Cross> crosslist; // ç”±äºä¹‹åcrossè¦æŒ‰idä»å°åˆ°å¤§éå† æ‰€ä»¥ç”¨æœ‰åºmap
 
 };
 

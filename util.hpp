@@ -7,12 +7,12 @@
 
 using namespace std;
 
-// ÓÅÏÈ¶ÓÁĞ
+// ä¼˜å…ˆé˜Ÿåˆ—
 template<typename T, typename priority_t>
 class PriorityQueue
 {
 public:
-	typedef pair<priority_t, T> PQElement; // ÀàĞÍ±ğ³Æ
+	typedef pair<priority_t, T> PQElement; // ç±»å‹åˆ«ç§°
 
 	inline bool empty() const
 	{
@@ -21,10 +21,10 @@ public:
 
 	inline void push(T item, priority_t priority) 
 	{
-		elements.emplace(priority, item); // ¼Óµ½ÓÅÏÈ¶ÓÁĞ
+		elements.emplace(priority, item); // åŠ åˆ°ä¼˜å…ˆé˜Ÿåˆ—
 	}
 
-	T pop() // È¡³öÓÅÏÈ¶ÓÁĞÖĞµÄtop
+	T pop() // å–å‡ºä¼˜å…ˆé˜Ÿåˆ—ä¸­çš„top
 	{ 
 		T best_item = elements.top().second;
 		elements.pop();
@@ -32,7 +32,7 @@ public:
 	}
 
 private:
-	// ÄÚ²¿ÓÃÁË±ê×¼¿âÖĞµÄÓÅÏÈ¶ÓÁĞ
+	// å†…éƒ¨ç”¨äº†æ ‡å‡†åº“ä¸­çš„ä¼˜å…ˆé˜Ÿåˆ—
 	priority_queue<PQElement, vector<PQElement>, greater<PQElement> > elements;
 
 

@@ -17,12 +17,12 @@ public:
 		initScheduler(cartxt, roadtxt, crosstxt);
 	}
 
-	long time; // µ÷¶ÈÊ±¼ä
-	bool isDone; //ÊÇ·ñµ÷¶ÈÍê³É
-	void step(); // ×ßÒ»¸öÊ±¼äÆ¬¶Î
+	long time; // è°ƒåº¦æ—¶é—´
+	bool isDone; //æ˜¯å¦è°ƒåº¦å®Œæˆ
+	void step(); // èµ°ä¸€ä¸ªæ—¶é—´ç‰‡æ®µ
 
-	CarList carwaitgo; // µÈ´ıÉÏÂ·µÄ³µ
-	CarList carsetoff; // ÔÚÂ·ÉÏµÄ³µ
+	CarList carwaitgo; // ç­‰å¾…ä¸Šè·¯çš„è½¦
+	CarList carsetoff; // åœ¨è·¯ä¸Šçš„è½¦
 	RoadList roadlist;
 	CrossList crosslist;
 	RoadGraph roadgraph;
@@ -30,25 +30,25 @@ public:
 private:
 	void initScheduler(string cartxt, string roadtxt, string crosstxt);
 
-	void scheduleCarwaitgo(); // µ÷¶ÈµÈ´ıÉÏÂ·µÄ³µ
+	void scheduleCarwaitgo(); // è°ƒåº¦ç­‰å¾…ä¸Šè·¯çš„è½¦
 
-	void scheduleInit(); // Ã¿´Îµ÷¶ÈÇ°×¼±¸
-	void scheduleRoad(); // µ÷¶ÈÃ¿Ò»ÌõµÀÂ·
-	void scheduleLane(Road& road, Lane& lane); // µ÷¶ÈÂ·Ò»¸ö·½ÏòÉÏµÄËùÓĞ³µµÀ
-	bool scheduleCross(); // µ÷¶ÈËùÓĞÂ·¿Ú
+	void scheduleInit(); // æ¯æ¬¡è°ƒåº¦å‰å‡†å¤‡
+	void scheduleRoad(); // è°ƒåº¦æ¯ä¸€æ¡é“è·¯
+	void scheduleLane(Road& road, Lane& lane); // è°ƒåº¦è·¯ä¸€ä¸ªæ–¹å‘ä¸Šçš„æ‰€æœ‰è½¦é“
+	bool scheduleCross(); // è°ƒåº¦æ‰€æœ‰è·¯å£
 	bool scheduleCrossRoad(Cross& cross);
 
-	void enterRoad(Car& car, Lane& lane, int lane_num, int speed); // ³µ½øÈëµÀÂ·
-	void leaveRoad(Car& car, Lane& lane); // ³µÀë¿ªµÀÂ·
-	long getfirstCar(Road& road, Cross& to); // ·µ»ØÒ»¸ö·½ÏòµÄ³µµÀÖĞ×îÏÈµ÷¶ÈµÄ³µ
+	void enterRoad(Car& car, Lane& lane, int lane_num, int speed); // è½¦è¿›å…¥é“è·¯
+	void leaveRoad(Car& car, Lane& lane); // è½¦ç¦»å¼€é“è·¯
+	long getfirstCar(Road& road, Cross& to); // è¿”å›ä¸€ä¸ªæ–¹å‘çš„è½¦é“ä¸­æœ€å…ˆè°ƒåº¦çš„è½¦
 	bool tryEnterRoad(Cross& cross, Road& road, Car& car);
 
 	void answer(Car& car);
 	void showstatus();
 
-	bool flag1; // ¼ÇÂ¼±éÀú ËùÓĞcross µÄÒ»¸öÑ­»·ÖĞ ÊÇ·ñ·¢ÉúÁËµ÷¶È Èç¹ûµ÷¶ÈÔÙ½øĞĞÒ»´ÎÕâ¸öÑ­»·
-	bool flag2; // ¼ÇÂ¼±éÀú Ò»¸öcrossËùÓĞÂ· µÄÑ­»·ÖĞ ÊÇ·ñ·¢ÉúÁËµ÷¶È
-	bool flag3; // ¼ÇÂ¼±éÀúÒ»¸öcrossËùÓĞÂ·µÄÑ­»·ÖĞ ÊÇ·ñ·¢ÉúÁËµ÷¶È Èç¹ûµ÷¶ÈÔÙ½øĞĞÒ»´ÎÕâ¸öÑ­»· Ö±µ½Ã»ÓĞµ÷¶È
+	bool flag1; // è®°å½•éå† æ‰€æœ‰cross çš„ä¸€ä¸ªå¾ªç¯ä¸­ æ˜¯å¦å‘ç”Ÿäº†è°ƒåº¦ å¦‚æœè°ƒåº¦å†è¿›è¡Œä¸€æ¬¡è¿™ä¸ªå¾ªç¯
+	bool flag2; // è®°å½•éå† ä¸€ä¸ªcrossæ‰€æœ‰è·¯ çš„å¾ªç¯ä¸­ æ˜¯å¦å‘ç”Ÿäº†è°ƒåº¦
+	bool flag3; // è®°å½•éå†ä¸€ä¸ªcrossæ‰€æœ‰è·¯çš„å¾ªç¯ä¸­ æ˜¯å¦å‘ç”Ÿäº†è°ƒåº¦ å¦‚æœè°ƒåº¦å†è¿›è¡Œä¸€æ¬¡è¿™ä¸ªå¾ªç¯ ç›´åˆ°æ²¡æœ‰è°ƒåº¦
 
 	long carnum = 0;
 	long donenum = 0;
@@ -68,7 +68,7 @@ void Scheduler::initScheduler(string cartxt, string roadtxt, string crosstxt)
 	roadgraph.initGraph(crosslist, roadlist);
 	cout << "initGraph done!" << endl;
 
-	// Ô¤ÏÈ¸øÃ¿Á¾³µÉè¶¨ºÃÂ·Ïß
+	// é¢„å…ˆç»™æ¯è¾†è½¦è®¾å®šå¥½è·¯çº¿
 	for (auto& car : carwaitgo)
 		roadgraph.findFastestRoute(crosslist, roadlist, car.second);
 
@@ -94,74 +94,76 @@ void Scheduler::step()
 	time++;
 	showstatus();
 
-	if (carwaitgo.empty() && carsetoff.empty()) // Â·ÉÏÃ»³µ Í¬Ê± Ã»³µÒªÉÏÂ·
+	if (carwaitgo.empty() && carsetoff.empty()) // è·¯ä¸Šæ²¡è½¦ åŒæ—¶ æ²¡è½¦è¦ä¸Šè·¯
 	{
 		isDone = true;
 		return;
 	}
 	else
 	{
-		scheduleInit(); // µ÷¶ÈÇ°³õÊ¼»¯
+		scheduleInit(); // è°ƒåº¦å‰åˆå§‹åŒ–
 
-		if (!carsetoff.empty()) // Â·ÉÏÓĞ³µÏÈ´¦Àí
+		if (!carsetoff.empty()) // è·¯ä¸Šæœ‰è½¦å…ˆå¤„ç†
 		{
-			scheduleRoad(); // ÏÈµ÷¶ÈÒ»±éËùÓĞÂ·
-			while (scheduleCross()); // Ñ­»·µ÷¶ÈÂ·¿Ú Ö±µ½ËùÓĞÂ·¿Ú¶¼²»±ä
+			scheduleRoad(); // å…ˆè°ƒåº¦ä¸€éæ‰€æœ‰è·¯
+			while (scheduleCross()); // å¾ªç¯è°ƒåº¦è·¯å£ ç›´åˆ°æ‰€æœ‰è·¯å£éƒ½ä¸å˜
 		}
 
-		if (!carwaitgo.empty()) // ÓĞ³µµÈ´ı³ö·¢
+		if (!carwaitgo.empty()) // æœ‰è½¦ç­‰å¾…å‡ºå‘
 			scheduleCarwaitgo();
 	}
 }
 
-// µ÷¶ÈÃ»ÉÏÂ·µÄ³µ
+// è°ƒåº¦æ²¡ä¸Šè·¯çš„è½¦
 void Scheduler::scheduleCarwaitgo()
 {
-	list<long> carid; // ¼ÇÂ¼³ö·¢³µµÄid
-
-	for (auto& carinfo : carwaitgo) // ±éÀúËùÓĞµÈ´ıÉÏÂ·µÄ³µ
+	list<long> carid; // è®°å½•å‡ºå‘è½¦çš„id
+	for (auto& carinfo : carwaitgo)
 	{
 		Car& car = carinfo.second;
-		if (car.plan_time > time) // ÈôÃ»µ½³ö·¢Ê±¼ä
+		if (car.plan_time > time) // è‹¥æ²¡åˆ°å‡ºå‘æ—¶é—´
+			continue;
+		carid.push_back(car.id);
+	}
+
+	for (long id : carid) // éå†æ‰€æœ‰ç­‰å¾…ä¸Šè·¯çš„è½¦
+	{
+		Car& car = carwaitgo[id];
+		if (car.plan_time > time) // è‹¥æ²¡åˆ°å‡ºå‘æ—¶é—´
 			continue;
 
 		Road& road = roadlist[car.next_road];
 		if (tryEnterRoad(crosslist[car.from_id], road, car))
-			carid.push_back(car.id);
-	}
-
-	// ¸üĞÂÁ½¸ö ³µÁĞ±í
-	// ´Ó´ı³ö·¢µÄ³µÁĞ±íÖĞÉ¾³ıÒÑ¾­³ö·¢µÄ³µ ÒÔ¼° ½«³ö·¢µÄ³µ¼ÓÈëcarsetoff
-	// Ö®ËùÒÔÔÚÕâÀï¸üĞÂÊÇÒòÎª ÉÏÃæÔÚ±éÀúÊ±ÓÃÁËµü´úÆ÷ ÔÚÑ­»·Ê±É¾³ıÁĞ±íÔªËØ»á³öÎÊÌâ
-	for (auto id : carid)
-	{
-		carsetoff.add(carwaitgo[id]);
-		carwaitgo.remove(id);
+		{
+			// æ›´æ–°ä¸¤ä¸ª è½¦åˆ—è¡¨
+			carsetoff.add(car);
+			carwaitgo.remove(car.id);
+		}
 	}
 }
 
-// µ÷¶ÈÇ°×¼±¸
+// è°ƒåº¦å‰å‡†å¤‡
 void Scheduler::scheduleInit()
 {
 	for (auto& car : carsetoff)
-		car.second.isScheduled = false; // ËùÓĞ³µµÄ ÊÇ·ñµ÷¶ÈÍê±Ï ÉèÖÃÎª false
+		car.second.isScheduled = false; // æ‰€æœ‰è½¦çš„ æ˜¯å¦è°ƒåº¦å®Œæ¯• è®¾ç½®ä¸º false
 }
 
 void Scheduler::scheduleRoad()
 {
-	for (auto& roadinfo : roadlist) // ±éÀúËùÓĞµÀÂ·
+	for (auto& roadinfo : roadlist) // éå†æ‰€æœ‰é“è·¯
 	{
-		// ÏÈ´¦Àífromµ½to½ÚµãµÄ³µµÀ
+		// å…ˆå¤„ç†fromåˆ°toèŠ‚ç‚¹çš„è½¦é“
 		Road& road = roadinfo.second;
 
 		vector<Lane>& lanes_from_to = road.getRoadCars(road.to_id);
-		for (auto& lane : lanes_from_to) // ¶ÔËùÓĞ³µµÀ´¦Àí
+		for (auto& lane : lanes_from_to) // å¯¹æ‰€æœ‰è½¦é“å¤„ç†
 			scheduleLane(road, lane);
 
 		if (road.isDuplex)
 		{
 			vector<Lane>& lanes_to_from = road.getRoadCars(road.from_id);
-			for (auto& lane : lanes_to_from) // ¶ÔËùÓĞ³µµÀ´¦Àí
+			for (auto& lane : lanes_to_from) // å¯¹æ‰€æœ‰è½¦é“å¤„ç†
 				scheduleLane(road, lane);
 		}
 	}
@@ -170,19 +172,19 @@ void Scheduler::scheduleRoad()
 void Scheduler::scheduleLane(Road& road, Lane& lane)
 {
 	long before = -1;
-	for (auto carid : lane) // ¶ÔÃ¿¸ö³µµÀÉÏµÄ³µ´¦Àí
+	for (auto carid : lane) // å¯¹æ¯ä¸ªè½¦é“ä¸Šçš„è½¦å¤„ç†
 	{
 		Car& car = carsetoff[carid];
-		if (car.isScheduled) // ÒÑ¾­µ÷¶È¹ıµÄ»°´¦ÀíÏÂÒ»Á¾³µ
+		if (car.isScheduled) // å·²ç»è°ƒåº¦è¿‡çš„è¯å¤„ç†ä¸‹ä¸€è¾†è½¦
 			continue;
 
-		int maxspeed = min(road.max_speed, car.max_speed); // ³µÀíÂÛ×î´óËÙ¶È
+		int maxspeed = min(road.max_speed, car.max_speed); // è½¦ç†è®ºæœ€å¤§é€Ÿåº¦
 
-		// ÊÇ·ñÊÇ¸Ã³µµÀµÄµÚÒ»Á¾³µ·Ö¿ª¿¼ÂÇ
-		if (before < 0) // beforeĞ¡ÓÚ0 Îª¸Ã³µµÀµÄµÚÒ»Á¾³µ
+		// æ˜¯å¦æ˜¯è¯¥è½¦é“çš„ç¬¬ä¸€è¾†è½¦åˆ†å¼€è€ƒè™‘
+		if (before < 0) // beforeå°äº0 ä¸ºè¯¥è½¦é“çš„ç¬¬ä¸€è¾†è½¦
 		{
 			if (car.pos == road.length ||
-				road.length - car.pos < maxspeed) // ³µÔÚÂ·¿Ú »ò ¸Ã³µÏÂÒ»²½½«´©¹ıÂ·¿Ú
+				road.length - car.pos < maxspeed) // è½¦åœ¨è·¯å£ æˆ– è¯¥è½¦ä¸‹ä¸€æ­¥å°†ç©¿è¿‡è·¯å£
 				before = carid;
 			else
 			{
@@ -195,16 +197,16 @@ void Scheduler::scheduleLane(Road& road, Lane& lane)
 		else
 		{
 			Car& carbefore = carsetoff[before];
-			if (carbefore.pos - car.pos - 1 >= maxspeed) // ¾àÀëÇ°³µ×ã¹»Ô¶
+			if (carbefore.pos - car.pos - 1 >= maxspeed) // è·ç¦»å‰è½¦è¶³å¤Ÿè¿œ
 			{
 				car.pos += maxspeed;
 				car.isScheduled = true;
 				car.isStoped = false;
 				before = carid;
 			}
-			else if (!carbefore.isScheduled) // ¾àÀëÇ°³µ²»¹»Ô¶ Ç°³µÃ»ÓĞµ÷¶ÈÍê±Ï
+			else if (!carbefore.isScheduled) // è·ç¦»å‰è½¦ä¸å¤Ÿè¿œ å‰è½¦æ²¡æœ‰è°ƒåº¦å®Œæ¯•
 				before = carid;
-			else if (carbefore.isStoped) // ¾àÀëÇ°³µ²»¹»Ô¶ Ç°³µµ÷¶ÈÍê±Ï Í£ÁË
+			else if (carbefore.isStoped) // è·ç¦»å‰è½¦ä¸å¤Ÿè¿œ å‰è½¦è°ƒåº¦å®Œæ¯• åœäº†
 			{
 				car.isStoped = true;
 				car.isScheduled = true;
@@ -218,13 +220,13 @@ void Scheduler::scheduleLane(Road& road, Lane& lane)
 				before = carid;
 			}
 		}
-	} // ¶ÔÒ»³µµÀÉÏµÄ³µ´¦ÀíÍê±Ï
+	} // å¯¹ä¸€è½¦é“ä¸Šçš„è½¦å¤„ç†å®Œæ¯•
 }
 
 bool Scheduler::scheduleCross()
 {
-	flag1 = false; // ÅĞ¶ÏÕâ¸öcross´óÑ­»·ÊÇ·ñ½øĞĞÁËµ÷¶È Èç¹û¾­¹ıµ÷¶È ĞèÒªÔÙ½øÒ»´Î´óÑ­»·
-	for (auto& crossinfo : crosslist) // °´idË³Ğòµ÷¶ÈÂ·¿Ú ´óÑ­»·
+	flag1 = false; // åˆ¤æ–­è¿™ä¸ªcrosså¤§å¾ªç¯æ˜¯å¦è¿›è¡Œäº†è°ƒåº¦ å¦‚æœç»è¿‡è°ƒåº¦ éœ€è¦å†è¿›ä¸€æ¬¡å¤§å¾ªç¯
+	for (auto& crossinfo : crosslist) // æŒ‰idé¡ºåºè°ƒåº¦è·¯å£ å¤§å¾ªç¯
 	{
 		Cross& cross = crossinfo.second;
 
@@ -237,27 +239,27 @@ bool Scheduler::scheduleCrossRoad(Cross& cross)
 {
 	flag2 = false;
 	flag3 = true;
-	while (flag3) // Ã»ÓĞµ÷¶È·¢Éú²ÅÍË³ö
+	while (flag3) // æ²¡æœ‰è°ƒåº¦å‘ç”Ÿæ‰é€€å‡º
 	{
 		flag3 = false;
-		// idÉıĞòµ÷¶ÈÂ·¿ÚµÄ¸÷ÌõÂ·
+		// idå‡åºè°ƒåº¦è·¯å£çš„å„æ¡è·¯
 		for (auto& roadinfo : cross.road_id)
 		{
-			// ÓĞÂ· ÇÒ ÓĞÍ¨Íù¸ÃÂ·¿Ú·½ÏòµÄ³µµÀ
+			// æœ‰è·¯ ä¸” æœ‰é€šå¾€è¯¥è·¯å£æ–¹å‘çš„è½¦é“
 			if (roadinfo.second > 0 && roadlist[roadinfo.second].isTo(cross.id))
 			{
 				Road& road = roadlist[roadinfo.second];
-				long carid = getfirstCar(road, cross); // ·µ»Ø-1 ÕâÌõÂ·Ã»ÓĞ³µ¹ıÂ·¿Ú
+				long carid = getfirstCar(road, cross); // è¿”å›-1 è¿™æ¡è·¯æ²¡æœ‰è½¦è¿‡è·¯å£
 				
 				if (carid >= 0)
 				{
 					Car& car = carsetoff[carid];
-					int from = cross.getRoadIdx(road.id); // ÕâÌõÂ·µÄĞòºÅ
-					int lane_num = car.lane_num; // ±£´æÏÂ³µÔ­À´ĞĞÊ»µÄ³µµÀºÅ
+					int from = cross.getRoadIdx(road.id); // è¿™æ¡è·¯çš„åºå·
+					int lane_num = car.lane_num; // ä¿å­˜ä¸‹è½¦åŸæ¥è¡Œé©¶çš„è½¦é“å·
 					Lane& lane = road.getRoadCars(cross.id)[lane_num];
 
-					// ÏÈÅĞ¶ÏÕâ¸öÂ·¿ÚÊÇ²»ÊÇ¾ÍÊÇÄ¿µÄµØ ÊÇµÄ»°²»ÓÃ½øÈëÏÂÒ»ÌõÂ·
-					if (car.next_road < 0) // Ã»ÓĞÏÂÒ»ÌõÂ· ËµÃ÷µ½Ä¿µÄµØ
+					// å…ˆåˆ¤æ–­è¿™ä¸ªè·¯å£æ˜¯ä¸æ˜¯å°±æ˜¯ç›®çš„åœ° æ˜¯çš„è¯ä¸ç”¨è¿›å…¥ä¸‹ä¸€æ¡è·¯
+					if (car.next_road < 0) // æ²¡æœ‰ä¸‹ä¸€æ¡è·¯ è¯´æ˜åˆ°ç›®çš„åœ°
 					{
 						answer(car);
 
@@ -267,19 +269,19 @@ bool Scheduler::scheduleCrossRoad(Cross& cross)
 						continue;
 					}
 
-					// ÔÙÅĞ¶Ï ¹ıÂ·¿Ú µÄÇé¿ö
-					if (car.next_turn == 0) // Ö±ĞĞ
+					// å†åˆ¤æ–­ è¿‡è·¯å£ çš„æƒ…å†µ
+					if (car.next_turn == 0) // ç›´è¡Œ
 					{
 						bool done = tryEnterRoad(cross, road, car);
 						flag3 = done || flag3;
-						if (done) // ³µÈô³É¹¦¹ıÂ·¿Ú Á¢¿Ì¶ÔÔ­³µµÀ½øĞĞÒ»´Îµ÷¶È
+						if (done) // è½¦è‹¥æˆåŠŸè¿‡è·¯å£ ç«‹åˆ»å¯¹åŸè½¦é“è¿›è¡Œä¸€æ¬¡è°ƒåº¦
 							scheduleLane(road, lane);
 					}
-					else if (car.next_turn == 1) // ×ó×ª ¿¼ÂÇÓÒ±ßµÀÂ·ÓÅÏÈ¼¶×î¸ßµÄ³µÊÇ²»ÊÇÖ±ĞĞ
+					else if (car.next_turn == 1) // å·¦è½¬ è€ƒè™‘å³è¾¹é“è·¯ä¼˜å…ˆçº§æœ€é«˜çš„è½¦æ˜¯ä¸æ˜¯ç›´è¡Œ
 					{
 						int right = from == 0 ? 3 : from - 1;
-						// ÕÒµ½ÓÒ±ßÕâÌõÂ·ÓÅÏÈ¼¶×î¸ßµÄ³µ
-						// ÓÒ±ßÓĞ³µ ÇÒ Ö±ĞĞ ÏÈÌø¹ıµ±Ç°³µµÄµ÷¶È
+						// æ‰¾åˆ°å³è¾¹è¿™æ¡è·¯ä¼˜å…ˆçº§æœ€é«˜çš„è½¦
+						// å³è¾¹æœ‰è½¦ ä¸” ç›´è¡Œ å…ˆè·³è¿‡å½“å‰è½¦çš„è°ƒåº¦
 						long rightroadid = cross.road_id[right];
 						if (rightroadid >= 0)
 						{
@@ -290,10 +292,10 @@ bool Scheduler::scheduleCrossRoad(Cross& cross)
 
 						bool done = tryEnterRoad(cross, road, car);
 						flag3 = done || flag3;
-						if (done) // ³µÈô³É¹¦¹ıÂ·¿Ú Á¢¿Ì¶ÔÔ­³µµÀ½øĞĞÒ»´Îµ÷¶È
+						if (done) // è½¦è‹¥æˆåŠŸè¿‡è·¯å£ ç«‹åˆ»å¯¹åŸè½¦é“è¿›è¡Œä¸€æ¬¡è°ƒåº¦
 							scheduleLane(road, lane);
 					}
-					else // ÓÒ×ª ĞèÒª¿´×ó±ßÊÇ·ñÖ±ĞĞ ÒÔ¼° ¶ÔÃæÊÇ·ñ×ó×ª
+					else // å³è½¬ éœ€è¦çœ‹å·¦è¾¹æ˜¯å¦ç›´è¡Œ ä»¥åŠ å¯¹é¢æ˜¯å¦å·¦è½¬
 					{
 						int left = from == 3 ? 0 : from + 1;
 						int front = from > 1 ? from - 2 : from + 2;
@@ -316,127 +318,127 @@ bool Scheduler::scheduleCrossRoad(Cross& cross)
 
 						bool done = tryEnterRoad(cross, road, car);
 						flag3 = done || flag3;
-						if (done) // ³µÈô³É¹¦¹ıÂ·¿Ú Á¢¿Ì¶ÔÔ­³µµÀ½øĞĞÒ»´Îµ÷¶È
+						if (done) // è½¦è‹¥æˆåŠŸè¿‡è·¯å£ ç«‹åˆ»å¯¹åŸè½¦é“è¿›è¡Œä¸€æ¬¡è°ƒåº¦
 							scheduleLane(road, lane);
 					}
 				}
 			}
-		} // Â·¿Ú¸÷ÌõÂ·Ñ­»·´¦ÀíÒ»±é
+		} // è·¯å£å„æ¡è·¯å¾ªç¯å¤„ç†ä¸€é
 		if (flag3) flag2 = true;
-	} // whileÑ­»·
+	} // whileå¾ªç¯
 	return flag2;
 }
 
-// ³¢ÊÔ½øÈëÏÂÒ»ÌõÂ· ·µ»ØÊÇ·ñ³É¹¦
+// å°è¯•è¿›å…¥ä¸‹ä¸€æ¡è·¯ è¿”å›æ˜¯å¦æˆåŠŸ
 bool Scheduler::tryEnterRoad(Cross& cross, Road& road, Car& car)
 {
-	// È¡³öÏÂÒ»ÌõÂ·µÄ³µµÀ
+	// å–å‡ºä¸‹ä¸€æ¡è·¯çš„è½¦é“
 	Road& next_road = roadlist[car.next_road];
 	vector<Lane>& roadcars = next_road.getRoadCars(car.next_cross);
 
-	// ÅĞ¶Ï³µÄÜ²»ÄÜ¹ıÂ·¿Ú
+	// åˆ¤æ–­è½¦èƒ½ä¸èƒ½è¿‡è·¯å£
 	int maxspeed = min(next_road.max_speed, car.max_speed);
-	// ±éÀúËùÓĞ³µµÀ ¿´ÓĞÃ»ÓĞ³µµÀÄÜ½øÈ¥
+	// éå†æ‰€æœ‰è½¦é“ çœ‹æœ‰æ²¡æœ‰è½¦é“èƒ½è¿›å»
 	int lane_num = 0;
 	for (; lane_num < roadcars.size(); lane_num++)
 	{
 		Lane& lane = roadcars[lane_num];
 
-		// Èç¹û±éÀúµ½µÄ³µµÀÊÇ¿ÕµÄ »ò ÓëÇ°³µÓĞ×ã¹»³¤µÄ¾àÀë Ö±½ÓÒÔ×î´óËÙ¶È
+		// å¦‚æœéå†åˆ°çš„è½¦é“æ˜¯ç©ºçš„ æˆ– ä¸å‰è½¦æœ‰è¶³å¤Ÿé•¿çš„è·ç¦» ç›´æ¥ä»¥æœ€å¤§é€Ÿåº¦
 		if (lane.empty())
 		{
-			if (car.isSetoff) // Èç¹û³µÒÑ¾­³ö·¢ ĞèÒªÏÈÀë¿ªÖ®Ç°µÄÂ·
+			if (car.isSetoff) // å¦‚æœè½¦å·²ç»å‡ºå‘ éœ€è¦å…ˆç¦»å¼€ä¹‹å‰çš„è·¯
 				leaveRoad(car, road.getRoadCars(cross.id)[car.lane_num]);
 			enterRoad(car, lane, lane_num, maxspeed);
 			return true;
 		}
-		else // ³µµÀ·Ç¿Õ
+		else // è½¦é“éç©º
 		{
-			Car& lastcar = carsetoff[lane.back()]; // È¡³öÕâ¸ö³µµÀ×îºóÒ»Á¾³µ
+			Car& lastcar = carsetoff[lane.back()]; // å–å‡ºè¿™ä¸ªè½¦é“æœ€åä¸€è¾†è½¦
 			if (lastcar.pos - 1 > maxspeed)
 			{
-				if (car.isSetoff) // Èç¹û³µÒÑ¾­³ö·¢ ĞèÒªÏÈÀë¿ªÖ®Ç°µÄÂ·
+				if (car.isSetoff) // å¦‚æœè½¦å·²ç»å‡ºå‘ éœ€è¦å…ˆç¦»å¼€ä¹‹å‰çš„è·¯
 					leaveRoad(car, road.getRoadCars(cross.id)[car.lane_num]);
 				enterRoad(car, lane, lane_num, maxspeed);
 				return true;
 			}
-			else if (!lastcar.isStoped) // ·ñÔòÅĞ¶ÏÒ»ÏÂÇ°³µµÄ×´Ì¬ ÈçÔÚĞĞÊ» Ôò¸úÔÚÆäºóĞĞÊ»
+			else if (!lastcar.isStoped) // å¦åˆ™åˆ¤æ–­ä¸€ä¸‹å‰è½¦çš„çŠ¶æ€ å¦‚åœ¨è¡Œé©¶ åˆ™è·Ÿåœ¨å…¶åè¡Œé©¶
 			{
 				if (car.isSetoff)
 					leaveRoad(car, road.getRoadCars(cross.id)[car.lane_num]);
 				enterRoad(car, lane, lane_num, lastcar.pos - 1);
 				return true;
 			}
-			else // Èç¹ûÍ£ÁË ¸Ã³µµÀ¿Ï¶¨ÎŞ·¨ÉÏÂ· ÅĞ¶ÏÏÂÒ»¸ö³µµÀ
+			else // å¦‚æœåœäº† è¯¥è½¦é“è‚¯å®šæ— æ³•ä¸Šè·¯ åˆ¤æ–­ä¸‹ä¸€ä¸ªè½¦é“
 				continue;
 		}
 	}
-	// ËùÓĞ³µµÀ¶¼ÅĞ¶ÏÍê±Ï ¶¼²»ÄÜ½øÈëµÀÂ·
+	// æ‰€æœ‰è½¦é“éƒ½åˆ¤æ–­å®Œæ¯• éƒ½ä¸èƒ½è¿›å…¥é“è·¯
 	car.isStoped = true;
 	return false;
 }
 
-// ·µ»ØÕâÌõÂ·¹ıÂ·¿Ú×îÓÅÏÈµ÷¶ÈµÄ³µ(»¹±ØĞëÊÇÔÚµÈ´ıµ÷¶È×´Ì¬)
-// Õâ¸öº¯ÊıÍ¬Ê±¸üĞÂ ³µµÄÂ·Ïß ºÍ ³µµÄÂ·¿Ú×ªÍä·½Ïò
+// è¿”å›è¿™æ¡è·¯è¿‡è·¯å£æœ€ä¼˜å…ˆè°ƒåº¦çš„è½¦(è¿˜å¿…é¡»æ˜¯åœ¨ç­‰å¾…è°ƒåº¦çŠ¶æ€)
+// è¿™ä¸ªå‡½æ•°åŒæ—¶æ›´æ–° è½¦çš„è·¯çº¿ å’Œ è½¦çš„è·¯å£è½¬å¼¯æ–¹å‘
 long Scheduler::getfirstCar(Road& road, Cross& cross)
 {
 	vector<Lane>& lanes = road.getRoadCars(cross.id);
 	long carid = -1;
 	for (Lane& lane : lanes)
 	{
-		// Èç¹û¸Ã³µµÀÎª¿Õ »ò ×îÇ°ÃæµÄ³µÒÑ¾­¾­¹ıµ÷¶È ´¦ÀíÏÂÒ»¸ö³µµÀ
+		// å¦‚æœè¯¥è½¦é“ä¸ºç©º æˆ– æœ€å‰é¢çš„è½¦å·²ç»ç»è¿‡è°ƒåº¦ å¤„ç†ä¸‹ä¸€ä¸ªè½¦é“
 		if (lane.empty() || carsetoff[lane.front()].isScheduled)
 			continue;
 
-		if (carid < 0) // ´¦ÀíÂú×ãÌõ¼şµÄµÚÒ»Á¾³µ
+		if (carid < 0) // å¤„ç†æ»¡è¶³æ¡ä»¶çš„ç¬¬ä¸€è¾†è½¦
 		{
 			carid = lane.front();
 			if (carsetoff[carid].pos == road.length)
 				break;
 		}
-		else if (carsetoff[carid].pos < carsetoff[lane.front()].pos) // ¸ü¿¿½üÂ·¿Ú
+		else if (carsetoff[carid].pos < carsetoff[lane.front()].pos) // æ›´é è¿‘è·¯å£
 			carid = lane.front();
 	}
 
-	// Èç¹ûÕâÌõÂ·×î¸ßÓÅÏÈ¼¶µÄ³µ´æÔÚ ¸üĞÂ ³µµÄÏßÂ· Óë Â·¿Ú×ªÍä·½Ïò
+	// å¦‚æœè¿™æ¡è·¯æœ€é«˜ä¼˜å…ˆçº§çš„è½¦å­˜åœ¨ æ›´æ–° è½¦çš„çº¿è·¯ ä¸ è·¯å£è½¬å¼¯æ–¹å‘
 	if (carid >= 0)
 	{
 		Car& car = carsetoff[carid];
 
-		// ¸üĞÂ³µµÄÂ·Ïß
+		// æ›´æ–°è½¦çš„è·¯çº¿
 		roadgraph.findFastestRoute(crosslist, roadlist, car);
 
-		// ¸üĞÂ³µµÄĞĞÊ»·½Ïò
+		// æ›´æ–°è½¦çš„è¡Œé©¶æ–¹å‘
 		int from = cross.getRoadIdx(road.id);
 		int to = cross.getRoadIdx(car.next_road);
 		int diff = to - from;
-		if (abs(diff) == 2) // Ö±ĞĞ
+		if (abs(diff) == 2) // ç›´è¡Œ
 			car.next_turn = 0;
-		else if (diff == 1 || diff == -3) // ×ó×ª
+		else if (diff == 1 || diff == -3) // å·¦è½¬
 			car.next_turn = 1;
-		else // ÓÒ×ª
+		else // å³è½¬
 			car.next_turn = 2;
 	}
 
 
 
-	// Èç¹ûÕâÌõÂ·Õâ¸ö·½ÏòÃ»ÓĞ³µµÀ »ò ³µµÀ¶¼ÊÇ¿ÕµÄ »ò ¸÷³µµÀ×îÇ°ÃæµÄ³µ¶¼ÒÑ¾­¹ıµ÷¶È »á·µ»Ø-1
-	// ×ÜÖ® ·µ»Ø-1 ±íÊ¾ÕâÌõÂ·Ã»ÓĞ³µÒª¹ıÂ·¿Ú
+	// å¦‚æœè¿™æ¡è·¯è¿™ä¸ªæ–¹å‘æ²¡æœ‰è½¦é“ æˆ– è½¦é“éƒ½æ˜¯ç©ºçš„ æˆ– å„è½¦é“æœ€å‰é¢çš„è½¦éƒ½å·²ç»è¿‡è°ƒåº¦ ä¼šè¿”å›-1
+	// æ€»ä¹‹ è¿”å›-1 è¡¨ç¤ºè¿™æ¡è·¯æ²¡æœ‰è½¦è¦è¿‡è·¯å£
 	return carid;
 }
 
 void Scheduler::enterRoad(Car& car, Lane& lane, int lane_num, int speed)
 {
-	// ¸üĞÂ³µµÄĞÅÏ¢
+	// æ›´æ–°è½¦çš„ä¿¡æ¯
 	car.curr_speed = speed;
 	car.pos = speed;
 	car.isStoped = false;
 	car.isScheduled = true;
 	car.lane_num = lane_num;
-	// ¸üĞÂµÀÂ·ĞÅÏ¢
+	// æ›´æ–°é“è·¯ä¿¡æ¯
 	lane.push_back(car.id);
 
-	if (!car.isSetoff) // ¸Õ·¢³µ
+	if (!car.isSetoff) // åˆšå‘è½¦
 	{
 		car.isSetoff = true;
 		car.real_time = time;
@@ -451,7 +453,7 @@ void Scheduler::leaveRoad(Car& car, Lane& lane)
 
 void Scheduler::answer(Car& car)
 {
-	// Êä³ö½á¹û
+	// è¾“å‡ºç»“æœ
 	cout << car.id << " done! " << endl << car;
 	car.showRoute();
 	cout << endl;

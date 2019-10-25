@@ -5,7 +5,7 @@
 #include <vector>
 #include <list>
 
-#include "corss.hpp"
+#include "cross.hpp"
 #include "road.hpp"
 #include "car.hpp"
 #include "util.hpp"
@@ -17,24 +17,24 @@ public:
 	RoadGraph() {}
 	RoadGraph(CrossList& crosslist, RoadList& roadlist) { initGraph(crosslist, roadlist); }
 	
-	// ³õÊ¼»¯Â·ÏßÍ¼ neighborsOf Óë distBetween ±ãÓÚÖ®ºóËÑË÷Â·¾¶
+	// åˆå§‹åŒ–è·¯çº¿å›¾ neighborsOf ä¸ distBetween ä¾¿äºä¹‹åæœç´¢è·¯å¾„
 	void initGraph(CrossList& crosslist, RoadList& roadlist);
 
 	void findFastestRoute(CrossList& crosslist, RoadList& roadlist, Car& car);
 
-	unordered_map<long, list<long> > neighborsOf; // Ò»¸ö½ÚµãµÄÏàÁÚ½Úµã
-	unordered_map<long, unordered_map<long, double> > distBetween; // ËùÓĞÏàÁÚ½ÚµãµÄ¾àÀë
-	unordered_map<long, unordered_map<long, long> > roadBetween; // ËùÓĞÏàÁÚ½ÚµãÖ®¼äÂ·µÄid
+	unordered_map<long, list<long> > neighborsOf; // ä¸€ä¸ªèŠ‚ç‚¹çš„ç›¸é‚»èŠ‚ç‚¹
+	unordered_map<long, unordered_map<long, double> > distBetween; // æ‰€æœ‰ç›¸é‚»èŠ‚ç‚¹çš„è·ç¦»
+	unordered_map<long, unordered_map<long, long> > roadBetween; // æ‰€æœ‰ç›¸é‚»èŠ‚ç‚¹ä¹‹é—´è·¯çš„id
 
 private:
-	void dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& car); // dijkstraÂ·¾¶ËÑË÷·½·¨
+	void dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& car); // dijkstraè·¯å¾„æœç´¢æ–¹æ³•
 
 };
 
-// Ä¿Ç°Õâ¸öº¯ÊıÃ»ÓĞÓÃµ½crosslistÓëroadlistµÄĞÅÏ¢
+// ç›®å‰è¿™ä¸ªå‡½æ•°æ²¡æœ‰ç”¨åˆ°crosslistä¸roadlistçš„ä¿¡æ¯
 void RoadGraph::findFastestRoute(CrossList& crosslist, RoadList& roadlist, Car& car)
 {
-	// DijkstraËã·¨ ÕâÀïcrosslistÓëroadlist carÓĞµÀÂ·ÊµÊ±ĞÅÏ¢ µ«ÕâÀïÏÈ²»ÓÃ
+	// Dijkstraç®—æ³• è¿™é‡Œcrosslistä¸roadlist caræœ‰é“è·¯å®æ—¶ä¿¡æ¯ ä½†è¿™é‡Œå…ˆä¸ç”¨
 	dijkstra_search(crosslist, roadlist, car);
 }
 
@@ -46,17 +46,17 @@ void RoadGraph::initGraph(CrossList& crosslist, RoadList& roadlist)
 		{
 			if (road_id.second < 0) continue;
 			Road& road = roadlist[road_id.second];
-			// Èç¹ûµ±Ç°crossÊÇroadµÄfrom½Úµã»òÕßÂ·ÊÇË«ÏòµÄ ¿Ï¶¨ÄÜ´ÓÕâ¸ö½Úµãµ½Â·ÁíÒ»¸ö½Úµã
-			// ·´¹ıÀ´ Èç¹ûÊÇµ¥ĞĞÏß ¶øÇÒ µ±Ç°Â·¿Ú²»ÊÇroadµÄfrom Ôò²»ÓëÂ·µÄÁí¸öÂ·¿ÚÏàÁÚ
+			// å¦‚æœå½“å‰crossæ˜¯roadçš„fromèŠ‚ç‚¹æˆ–è€…è·¯æ˜¯åŒå‘çš„ è‚¯å®šèƒ½ä»è¿™ä¸ªèŠ‚ç‚¹åˆ°è·¯å¦ä¸€ä¸ªèŠ‚ç‚¹
+			// åè¿‡æ¥ å¦‚æœæ˜¯å•è¡Œçº¿ è€Œä¸” å½“å‰è·¯å£ä¸æ˜¯roadçš„from åˆ™ä¸ä¸è·¯çš„å¦ä¸ªè·¯å£ç›¸é‚»
 			if (!road.isDuplex && road.from_id != cross.first)
 				continue;
 
-			// ÅĞ¶ÏÏÂÂ·ÁíÍâÒ»¸öÂ·¿Úid
+			// åˆ¤æ–­ä¸‹è·¯å¦å¤–ä¸€ä¸ªè·¯å£id
 			long cross_id_another = road.from_id != cross.first ? road.from_id : road.to_id;
 
 			neighborsOf[cross.first].push_back(cross_id_another);
-			distBetween[cross.first][cross_id_another] = road.length; // ×¢Òâµ¥ĞĞÂ·µÄÎÊÌâ ÕâÀï´æµÄ¿ÉÍ¨ĞĞ·½ÏòµÄ
-			roadBetween[cross.first][cross_id_another] = road.id; // ´æÁ½Â·¿ÚÖ®¼äµÀÂ·µÄid
+			distBetween[cross.first][cross_id_another] = road.length; // æ³¨æ„å•è¡Œè·¯çš„é—®é¢˜ è¿™é‡Œå­˜çš„å¯é€šè¡Œæ–¹å‘çš„
+			roadBetween[cross.first][cross_id_another] = road.id; // å­˜ä¸¤è·¯å£ä¹‹é—´é“è·¯çš„id
 		}
 	}
 }
@@ -66,7 +66,7 @@ void RoadGraph::dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& c
 	long from = car.next_cross;
 	long to = car.to_id;
 
-	if (from == to) // ´ËÊ±³µÒÑ¾­µ½ÁËÄ¿µÄµØÂ·¿Ú
+	if (from == to) // æ­¤æ—¶è½¦å·²ç»åˆ°äº†ç›®çš„åœ°è·¯å£
 	{
 		car.route_real.push_back(to);
 		car.route_plan.clear();
@@ -75,12 +75,12 @@ void RoadGraph::dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& c
 		return;
 	}
 
-	unordered_map<long, long> cameFrom; // ¼ÇÂ¼¸¸½Úµã
-	unordered_map<long, double> gScore; // ¼ÇÂ¼´ÓÆğÊ¼µãµ½Ã¿¸ö½ÚµãµÄcost
+	unordered_map<long, long> cameFrom; // è®°å½•çˆ¶èŠ‚ç‚¹
+	unordered_map<long, double> gScore; // è®°å½•ä»èµ·å§‹ç‚¹åˆ°æ¯ä¸ªèŠ‚ç‚¹çš„cost
 	PriorityQueue<long, double> openSet;
 	unordered_map<long, bool> closeSet;
 
-	openSet.push(from, 0); // ÆğÊ¼µãÈë¶Ó
+	openSet.push(from, 0); // èµ·å§‹ç‚¹å…¥é˜Ÿ
 	cameFrom[from] = from;
 	gScore[from] = 0;
 
@@ -89,7 +89,7 @@ void RoadGraph::dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& c
 		long current = openSet.pop();
 		closeSet[current] = true;
 
-		if (current == to) // µ½´ïÄ¿±ê ¸üĞÂcarµÄÂ·¾¶
+		if (current == to) // åˆ°è¾¾ç›®æ ‡ æ›´æ–°carçš„è·¯å¾„
 		{
 			car.route_plan.clear();
 			car.route_plan.push_front(current);
@@ -98,7 +98,7 @@ void RoadGraph::dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& c
 				current = cameFrom[current];
 				car.route_plan.push_front(current);
 			}
-			// ¸üĞÂcarµÄÆäËû²ÎÊı ¸üĞÂcarµÄÂ·ÏßĞÅÏ¢¶¼Ö»ÔÚÕâÀïÁË!!!
+			// æ›´æ–°carçš„å…¶ä»–å‚æ•° æ›´æ–°carçš„è·¯çº¿ä¿¡æ¯éƒ½åªåœ¨è¿™é‡Œäº†!!!
 			car.route_real.push_back(car.route_plan.front());
 			car.route_plan.pop_front();
 			car.next_cross = car.route_plan.front();
@@ -106,9 +106,9 @@ void RoadGraph::dijkstra_search(CrossList& crosslist, RoadList& roadlist, Car& c
 			return;
 		}
 
-		for (long neighbor : neighborsOf[current]) // ±éÀúÏàÁÚ½Úµã
+		for (long neighbor : neighborsOf[current]) // éå†ç›¸é‚»èŠ‚ç‚¹
 		{
-			if (closeSet.find(neighbor) != closeSet.end()) continue; // ÅĞ¶ÏÏÂÕâ¸ö½ÚµãÊÇ·ñ´¦Àí¹ı
+			if (closeSet.find(neighbor) != closeSet.end()) continue; // åˆ¤æ–­ä¸‹è¿™ä¸ªèŠ‚ç‚¹æ˜¯å¦å¤„ç†è¿‡
 
 			long roadid = roadBetween[current][neighbor];
 			Road& road = roadlist[roadid];
